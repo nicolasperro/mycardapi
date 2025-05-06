@@ -1,4 +1,4 @@
-package com.mycard.mktapi.model.entity;
+package com.mycard.mycardapi.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
