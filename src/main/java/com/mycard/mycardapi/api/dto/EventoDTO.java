@@ -1,10 +1,13 @@
 package com.mycard.mycardapi.api.dto;
 
 import com.mycard.mycardapi.model.entity.Atleta;
+import com.mycard.mycardapi.model.entity.Evento;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
+
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -22,7 +25,7 @@ public class EventoDTO {
     private String uf;
     private String cep;
 
-    public static EvemtoDTO create(Evento evento) {
+    public static EventoDTO create(Evento evento) {
         ModelMapper modelMapper = new ModelMapper();
         EventoDTO dto = modelMapper.map(evento, EventoDTO.class);
 

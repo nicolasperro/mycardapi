@@ -1,10 +1,13 @@
 package com.mycard.mycardapi.api.dto;
 
 import com.mycard.mycardapi.model.entity.Atleta;
+import com.mycard.mycardapi.model.entity.Equipe;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
+
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
