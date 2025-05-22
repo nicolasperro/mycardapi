@@ -11,28 +11,33 @@ import org.modelmapper.ModelMapper;
 @AllArgsConstructor
 public class AtletaDTO {
 
-    private Long id;
-    private Integer matricula;
-    private String nome;
-    private Long idCurso;
-    private String logradouro;
-    private Integer numero;
-    private String complemento;
-    private String bairro;
-    private String cidade;
-    private String uf;
-    private String cep;
+    private String nomeCompleto;
+    private LocalDate dataNascimento;
+    private String nacionalidade;
+    private Equipe equipe;
+    private Double altura;
+    private String genero;
+    private Double pesoCorporal;
+    private String apelido;
+    private String numeroContato;
+    private String emailContato;
+    private String textoDescricao;
 
     public static AtletaDTO create(Atleta atleta) {
         ModelMapper modelMapper = new ModelMapper();
         AtletaDTO dto = modelMapper.map(atleta, AtletaDTO.class);
-        dto.logradouro = atleta.getEndereco().getLogradouro();//as linhas com erro são pq eu copiei do marco e precisa ajeitar pro contexto do nosso projeto
-        dto.numero = atleta.getEndereco().getNumero();
-        dto.complemento = atleta.getEndereco().getComplemento();
-        dto.bairro = atleta.getEndereco().getBairro();
-        dto.cidade = atleta.getEndereco().getCidade();
-        dto.uf = atleta.getEndereco().getUf();
-        dto.cep = atleta.getEndereco().getCep();
+
+        dto.nomeCompleto = atleta.getNomeCompleto();
+        dto.dataNascimento = atleta.getDataNascimento();
+        dto.nacionalidade = atleta.getNacionalidade();
+        dto.equipe = atleta.getEquipe();
+        dto.altura = atleta.getAltura();
+        dto.genero = atleta.getGenero();
+        dto.pesoCorporal = atleta.getPesoCorporal();
+        dto.apelido = atleta.getApelido();
+        dto.numeroContato = atleta.getNumeroContato();
+        dto.emailContato = atleta.getEmailContato();
+        dto.textoDescricao = atleta.getTextoDescricao();
         return dto;
     }
 

@@ -17,18 +17,19 @@ public class Atleta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String foto;
+//    private String foto;
+
     private String nomeCompleto;
     private String genero;
     private LocalDate dataNascimento;
     private String nacionalidade;
-
-    @ManyToOne
-    private Equipe equipe;
     private Double altura;
     private Double pesoCorporal;
     private String apelido;
     private String numeroContato;
     private String emailContato;
     private String textoDescricao;
+
+    @ManyToOne
+    private Equipe equipe;
 }

@@ -17,7 +17,8 @@ public class Equipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String logo;
+//    private String logo;
+
     private String nomeEquipe;
     private LocalDate dataCriacao;
     private String logradouro;
