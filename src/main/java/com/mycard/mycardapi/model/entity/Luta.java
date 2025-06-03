@@ -17,11 +17,22 @@ public class Luta {
 
     @ManyToOne
     private Evento evento;
+
+    @ManyToOne
     private Atleta atleta01;
+
+    @ManyToOne
     private Atleta atleta02;
+
+    @ManyToOne
     private Atleta atletaVencedor;
+
+    @ManyToOne
     private Arbitro arbitro;
+
+    @ManyToOne
     private Modalidade modalidade;
+
     private String pesoCategoria;
     private Integer rounds;
 }
