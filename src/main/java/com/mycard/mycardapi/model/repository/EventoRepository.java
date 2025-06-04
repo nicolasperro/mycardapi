@@ -11,6 +11,7 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
 
     List<Evento> findByCidade(String cidade);
     List<Evento> findByUf(String uf);
-    List<Evento> findByDataOcorrencia(LocalDate data);
+    // data do evento
 }
+
 
