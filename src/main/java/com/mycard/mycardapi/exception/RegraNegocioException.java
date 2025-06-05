@@ -1,4 +1,4 @@
-package com.example.scaapi.exception;
+package com.mycard.mycardapi.exception;
 
 public class RegraNegocioException extends RuntimeException {
 
