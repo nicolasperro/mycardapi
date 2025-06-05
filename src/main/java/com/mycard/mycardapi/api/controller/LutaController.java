@@ -1,4 +1,4 @@
-package com.mycard.mycardapi.controller;
+package com.mycard.mycardapi.api.controller;
 
 import com.mycard.mycardapi.dto.LutaDTO;
 import com.mycard.mycardapi.exception.RegraNegocioException;
