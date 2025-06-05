@@ -1,7 +1,6 @@
 package com.mycard.mycardapi.api.dto;
 
 import com.mycard.mycardapi.model.entity.Arbitro;
-import com.mycard.mycardapi.model.entity.Atleta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
