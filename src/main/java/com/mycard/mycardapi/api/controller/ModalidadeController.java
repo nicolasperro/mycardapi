@@ -1,4 +1,4 @@
-package com.mycard.mycardapi.controller;
+package com.mycard.mycardapi.api.controller;
 
 import com.mycard.mycardapi.model.entity.Modalidade;
 import com.mycard.mycardapi.service.ModalidadeService;
