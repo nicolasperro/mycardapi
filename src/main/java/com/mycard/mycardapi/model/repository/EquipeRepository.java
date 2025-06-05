@@ -1,5 +1,4 @@
-
-package com.mycard.mycardapi.repository;
+package com.mycard.mycardapi.model.repository;
 
 import com.mycard.mycardapi.model.entity.Equipe;
 import org.springframework.data.jpa.repository.JpaRepository;
