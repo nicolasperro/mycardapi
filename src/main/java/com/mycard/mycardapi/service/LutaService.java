@@ -1,7 +1,7 @@
 package com.mycard.mycardapi.service;
 
 import com.mycard.mycardapi.model.entity.Luta;
-import com.mycard.mycardapi.repository.LutaRepository;
+import com.mycard.mycardapi.model.repository.LutaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
