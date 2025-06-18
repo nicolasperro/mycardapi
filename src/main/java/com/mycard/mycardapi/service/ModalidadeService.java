@@ -1,7 +1,7 @@
 package com.mycard.mycardapi.service;
 
 import com.mycard.mycardapi.model.entity.Modalidade;
-import com.mycard.mycardapi.repository.ModalidadeRepository;
+import com.mycard.mycardapi.model.repository.ModalidadeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
