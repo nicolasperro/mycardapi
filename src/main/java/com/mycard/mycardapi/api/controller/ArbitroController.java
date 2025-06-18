@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/organizacoes-arbitragem")
+@RequestMapping("/api/v1/arbitros")
 @RequiredArgsConstructor
 public class ArbitroController {
 
