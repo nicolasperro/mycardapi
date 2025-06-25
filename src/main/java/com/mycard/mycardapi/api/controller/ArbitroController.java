@@ -1,8 +1,10 @@
 package com.mycard.mycardapi.api.controller;
 
-import com.mycard.mycardapi.api.dto.OrganizacaoArbitragemDTO;
+import com.mycard.mycardapi.api.dto.ArbitroDTO;
 import com.mycard.mycardapi.exception.RegraNegocioException;
+import com.mycard.mycardapi.model.entity.Arbitro;
 import com.mycard.mycardapi.model.entity.OrganizacaoArbitragem;
+import com.mycard.mycardapi.service.ArbitroService;
 import com.mycard.mycardapi.service.OrganizacaoArbitragemService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -19,69 +21,74 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ArbitroController {
 
-    private final OrganizacaoArbitragemService service;
+    private final ArbitroService arbitroService;
+    private final OrganizacaoArbitragemService organizacaoService;
 
-    @GetMapping()
-    public ResponseEntity get() {
-        List<OrganizacaoArbitragem> organizacoes = service.listarTodas();
-        // Converte a lista de entidades para uma lista de DTOs para a resposta
-        return ResponseEntity.ok(organizacoes.stream()
-                .map(OrganizacaoArbitragemDTO::create)
-                .collect(Collectors.toList()));
+    @GetMapping
+    public ResponseEntity<List<ArbitroDTO>> getAll() {
+        List<Arbitro> arbitros = arbitroService.listarTodos();
+        List<ArbitroDTO> dtos = arbitros.stream()
+                .map(ArbitroDTO::create)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
-        Optional<OrganizacaoArbitragem> organizacao = service.getOrganizacaoById(id);
-        if (organizacao.isEmpty()) {
-            return new ResponseEntity("Organização de Arbitragem não encontrada", HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        Optional<Arbitro> arbitro = arbitroService.getArbitroById(id);
+        if (arbitro.isEmpty()) {
+            return new ResponseEntity<>("Árbitro não encontrado", HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(OrganizacaoArbitragemDTO.create(organizacao.get()));
+        return ResponseEntity.ok(ArbitroDTO.create(arbitro.get()));
     }
 
-    @PostMapping()
-    public ResponseEntity post(@RequestBody OrganizacaoArbitragemDTO dto) {
+    @PostMapping
+    public ResponseEntity<?> criar(@RequestBody ArbitroDTO dto) {
         try {
-            OrganizacaoArbitragem organizacao = converter(dto);
-            organizacao = service.salvar(organizacao);
-            // Retorna o DTO do objeto criado, como no padrão
-            return new ResponseEntity(OrganizacaoArbitragemDTO.create(organizacao), HttpStatus.CREATED);
+            Arbitro arbitro = converter(dto);
+            arbitro = arbitroService.salvar(arbitro);
+            return new ResponseEntity<>(ArbitroDTO.create(arbitro), HttpStatus.CREATED);
         } catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody OrganizacaoArbitragemDTO dto) {
-        // Verifica se a organização existe antes de tentar atualizar
-        if (service.getOrganizacaoById(id).isEmpty()) {
-            return new ResponseEntity("Organização de Arbitragem não encontrada", HttpStatus.NOT_FOUND);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody ArbitroDTO dto) {
+        Optional<Arbitro> existente = arbitroService.getArbitroById(id);
+        if (existente.isEmpty()) {
+            return new ResponseEntity<>("Árbitro não encontrado", HttpStatus.NOT_FOUND);
         }
         try {
-            OrganizacaoArbitragem organizacao = converter(dto);
-            organizacao.setId(id); // Garante que o ID correto seja atualizado
-            service.salvar(organizacao);
-            return ResponseEntity.ok(OrganizacaoArbitragemDTO.create(organizacao));
+            Arbitro arbitro = converter(dto);
+            arbitro.setId(id);
+            arbitro = arbitroService.salvar(arbitro);
+            return ResponseEntity.ok(ArbitroDTO.create(arbitro));
         } catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity excluir(@PathVariable("id") Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletar(@PathVariable Long id) {
         try {
-            // A lógica de verificação de existência já está no seu service, então apenas chamamos o método
-            service.deletar(id);
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            arbitroService.deletar(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (RegraNegocioException e) {
-            // Captura a exceção caso o service informe que a organização não foi encontrada
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    // Método privado para converter DTO em Entidade
-    private OrganizacaoArbitragem converter(OrganizacaoArbitragemDTO dto) {
+    private Arbitro converter(ArbitroDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(dto, OrganizacaoArbitragem.class);
+        Arbitro arbitro = modelMapper.map(dto, Arbitro.class);
+
+        if (dto.getIdOrganizacao() != null) {
+            OrganizacaoArbitragem organizacao = organizacaoService.getOrganizacaoById(dto.getIdOrganizacao())
+                    .orElseThrow(() -> new RegraNegocioException("Organização de arbitragem não encontrada"));
+            arbitro.setOrganizacao(organizacao);
+        }
+
+        return arbitro;
     }
 }
