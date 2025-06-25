@@ -45,7 +45,7 @@ public class Luta {
     @JoinColumn(name = "arbitro_id", nullable = false)
     private Arbitro arbitro;
 
-    private String categoriaPeso;
+    private String pesoCategoria;
 
     private Integer rounds;
 

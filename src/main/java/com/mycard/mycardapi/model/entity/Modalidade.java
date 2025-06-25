@@ -18,7 +18,7 @@ public class Modalidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    private String nomeModalidade;
 
     @OneToMany(mappedBy = "modalidade", cascade = CascadeType.ALL)
     private List<MetodoVitoria> metodosVitoria;
