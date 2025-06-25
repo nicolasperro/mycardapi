@@ -5,23 +5,33 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
+@Table(name = "evento")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Evento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nomeEvento;
+    private String nome;
     private LocalDate dataOcorrencia;
+
     private String logradouro;
-    private String numEndereco;
+    private String numero;
     private String cep;
     private String cidade;
     private String uf;
+
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id", nullable = false)
+    private Funcionario funcionario;
+
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
+    private List<Luta> lutas;
 }

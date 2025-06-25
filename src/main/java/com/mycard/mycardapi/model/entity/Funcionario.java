@@ -5,12 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "funcionario")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Funcionario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,4 +22,7 @@ public class Funcionario {
     private String cpf;
     private String emailContato;
     private String numeroContato;
+
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
+    private List<Evento> eventos;
 }

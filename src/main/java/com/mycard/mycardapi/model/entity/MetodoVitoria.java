@@ -11,9 +11,14 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MetodoVitoria {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String titulo;
+
+    @ManyToOne
+    @JoinColumn(name = "modalidade_id", nullable = false)
+    private Modalidade modalidade;
 }
