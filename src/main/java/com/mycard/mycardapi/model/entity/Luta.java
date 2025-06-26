@@ -18,23 +18,23 @@ public class Luta {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "evento_id")
+    @JoinColumn(name = "evento_id", nullable=false)
     private Evento evento;
 
     @ManyToOne
-    @JoinColumn(name = "atleta01_id")
+    @JoinColumn(name = "atleta01_id", nullable=false)
     private Atleta atleta01;
 
     @ManyToOne
-    @JoinColumn(name = "atleta02_id")
+    @JoinColumn(name = "atleta02_id", nullable=false)
     private Atleta atleta02;
 
     @ManyToOne
-    @JoinColumn(name = "atleta_vencedor_id")
+    @JoinColumn(name = "atleta_vencedor_id", nullable=false)
     private Atleta atletaVencedor;
 
     @ManyToOne
-    @JoinColumn(name = "modalidade_id")
+    @JoinColumn(name = "modalidade_id", nullable=false)
     private Modalidade modalidade;
 
     @ManyToOne
@@ -42,7 +42,7 @@ public class Luta {
     private OrganizacaoArbitragem organizacaoArbitragem;
 
     @ManyToOne
-    @JoinColumn(name = "arbitro_id")
+    @JoinColumn(name = "arbitro_id", nullable=false)
     private Arbitro arbitro;
 
     private String pesoCategoria;
