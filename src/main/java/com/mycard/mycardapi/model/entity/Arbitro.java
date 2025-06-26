@@ -21,6 +21,6 @@ public class Arbitro {
     private LocalDate dataNascimento;
 
     @ManyToOne
-    @JoinColumn(name = "organizacao_id", nullable = false)
+    @JoinColumn(name = "organizacao_id")
     private OrganizacaoArbitragem organizacao;
 }
