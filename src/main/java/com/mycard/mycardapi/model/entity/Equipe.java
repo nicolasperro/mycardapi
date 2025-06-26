@@ -19,11 +19,11 @@ public class Equipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    private String nomeEquipe;
     private LocalDate dataCriacao;
 
     private String logradouro;
-    private String numero;
+    private String numEndereco;
     private String cep;
     private String cidade;
     private String uf;

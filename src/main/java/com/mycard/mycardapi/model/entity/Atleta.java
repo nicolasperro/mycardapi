@@ -18,16 +18,16 @@ public class Atleta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    private String nomeCompleto;
     private String genero;
     private LocalDate dataNascimento;
     private String nacionalidade;
     private Double altura;
-    private Double peso;
+    private Double pesoCorporal;
     private String apelido;
     private String numeroContato;
     private String emailContato;
-    private String descricao;
+    private String textoDescricao;
 
     @ManyToOne
     @JoinColumn(name = "equipe_id")
