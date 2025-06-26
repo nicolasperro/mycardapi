@@ -29,7 +29,7 @@ public class Evento {
     private String uf;
 
     @ManyToOne
-    @JoinColumn(name = "funcionario_id", nullable = false)
+    @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
 
     @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)

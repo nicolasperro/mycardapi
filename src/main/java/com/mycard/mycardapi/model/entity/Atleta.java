@@ -30,6 +30,6 @@ public class Atleta {
     private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "equipe_id", nullable = false)
+    @JoinColumn(name = "equipe_id")
     private Equipe equipe;
 }

@@ -19,6 +19,6 @@ public class MetodoVitoria {
     private String titulo;
 
     @ManyToOne
-    @JoinColumn(name = "modalidade_id", nullable = false)
+    @JoinColumn(name = "modalidade_id")
     private Modalidade modalidade;
 }
