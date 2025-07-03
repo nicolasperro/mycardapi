@@ -18,8 +18,10 @@ public class LutaDTO {
     private Long idVencedor;
     private Long idArbitro;      // <-- O controller usa o getter deste campo: getIdArbitro()
     private Long idModalidade;   // <-- O controller usa o getter deste campo: getIdModalidade()
+    private Long idOrganizacao;
     private String pesoCategoria;
     private Integer rounds;
+    private Integer roundEncerramento;
 
     public static LutaDTO create(Luta luta) {
         ModelMapper modelMapper = new ModelMapper();
@@ -31,6 +33,7 @@ public class LutaDTO {
         if (luta.getAtletaVencedor() != null) dto.setIdVencedor(luta.getAtletaVencedor().getId());
         if (luta.getArbitro() != null) dto.setIdArbitro(luta.getArbitro().getId());
         if (luta.getModalidade() != null) dto.setIdModalidade(luta.getModalidade().getId());
+        if (luta.getOrganizacaoArbitragem() != null) dto.setIdOrganizacao(luta.getOrganizacaoArbitragem().getId());
 
         return dto;
     }

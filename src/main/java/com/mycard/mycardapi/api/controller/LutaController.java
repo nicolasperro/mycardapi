@@ -24,6 +24,7 @@ public class LutaController {
     private final AtletaService atletaService;
     private final ArbitroService arbitroService;
     private final ModalidadeService modalidadeService;
+    private final OrganizacaoArbitragemService organizacaoService;
 
     @GetMapping
     public ResponseEntity<List<LutaDTO>> get() {
@@ -116,6 +117,12 @@ public class LutaController {
             Modalidade modalidade = modalidadeService.getModalidadeById(dto.getIdModalidade())
                      .orElseThrow(() -> new RegraNegocioException("Modalidade não encontrada com id: " + dto.getIdModalidade()));
             luta.setModalidade(modalidade);
+        }
+
+                if (dto.getIdOrganizacao() != null) {
+            OrganizacaoArbitragem organizacao = organizacaoService.getOrganizacaoById(dto.getIdOrganizacao())
+                     .orElseThrow(() -> new RegraNegocioException("Arbitragem não encontrada com id: " + dto.getIdOrganizacao()));
+            luta.setOrganizacaoArbitragem(organizacao);
         }
 
         return luta;
