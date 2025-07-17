@@ -113,6 +113,18 @@ public class LutaController {
             luta.setModalidade(modalidade);
         }
 
+        if (dto.getIdArbitro() != null) {
+            Arbitro arbitro = arbitroService.getArbitroById(dto.getIdArbitro())
+                    .orElseThrow(() -> new RegraNegocioException("Árbitro não encontrado com id: " + dto.getIdArbitro()));
+            luta.setArbitro(arbitro);
+        }
+
+        if (dto.getIdOrganizacao() != null) {
+            OrganizacaoArbitragem organizacao = organizacaoService.getOrganizacaoById(dto.getIdOrganizacao())
+                    .orElseThrow(() -> new RegraNegocioException("Organização de Arbitragem não encontrada com id: " + dto.getIdOrganizacao()));
+            luta.setOrganizacaoArbitragem(organizacao);
+        }
+
         return luta;
     }
 }
