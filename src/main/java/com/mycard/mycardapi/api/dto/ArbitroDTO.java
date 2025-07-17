@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
+
 import java.time.LocalDate;
 
 @Data
@@ -15,7 +16,8 @@ public class ArbitroDTO {
     private Long id;
     private String nomeArbitro;
     private LocalDate dataNascimento;
-    private Long idOrganizacao; 
+    private Long idOrganizacao;
+    private String nomeOrganizacao; // ✅ Adicionado
 
     public static ArbitroDTO create(Arbitro arbitro) {
         ModelMapper modelMapper = new ModelMapper();
@@ -23,7 +25,9 @@ public class ArbitroDTO {
 
         if (arbitro.getOrganizacao() != null) {
             dto.setIdOrganizacao(arbitro.getOrganizacao().getId());
+            dto.setNomeOrganizacao(arbitro.getOrganizacao().getNomeOrganizacao()); // ✅ Aqui
         }
+
         return dto;
     }
 }

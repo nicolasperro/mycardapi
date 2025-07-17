@@ -100,29 +100,17 @@ public class LutaController {
                     .orElseThrow(() -> new RegraNegocioException("Atleta 2 não encontrado com id: " + dto.getIdAtleta2()));
             luta.setAtleta02(atleta2);
         }
-        
+
         if (dto.getIdVencedor() != null) {
             Atleta vencedor = atletaService.getAtletaById(dto.getIdVencedor())
                     .orElseThrow(() -> new RegraNegocioException("Atleta vencedor não encontrado com id: " + dto.getIdVencedor()));
             luta.setAtletaVencedor(vencedor);
         }
 
-        if (dto.getIdArbitro() != null) {
-            Arbitro arbitro = arbitroService.getArbitroById(dto.getIdArbitro())
-                    .orElseThrow(() -> new RegraNegocioException("Árbitro não encontrado com id: " + dto.getIdArbitro()));
-            luta.setArbitro(arbitro);
-        }
-        
         if (dto.getIdModalidade() != null) {
             Modalidade modalidade = modalidadeService.getModalidadeById(dto.getIdModalidade())
-                     .orElseThrow(() -> new RegraNegocioException("Modalidade não encontrada com id: " + dto.getIdModalidade()));
+                    .orElseThrow(() -> new RegraNegocioException("Modalidade não encontrada com id: " + dto.getIdModalidade()));
             luta.setModalidade(modalidade);
-        }
-
-                if (dto.getIdOrganizacao() != null) {
-            OrganizacaoArbitragem organizacao = organizacaoService.getOrganizacaoById(dto.getIdOrganizacao())
-                     .orElseThrow(() -> new RegraNegocioException("Arbitragem não encontrada com id: " + dto.getIdOrganizacao()));
-            luta.setOrganizacaoArbitragem(organizacao);
         }
 
         return luta;
