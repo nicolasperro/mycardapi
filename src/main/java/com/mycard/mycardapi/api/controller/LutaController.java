@@ -124,6 +124,9 @@ public class LutaController {
                     .orElseThrow(() -> new RegraNegocioException("Organização de Arbitragem não encontrada: " + dto.getIdOrganizacao()));
             luta.setOrganizacaoArbitragem(organizacao);
         }
+        if (roundEncerramento < 1 || roundEncerramento > rounds) {
+         return res.status(400).json({ error: "Round de encerramento inválido." });
+        }
 
         return luta;
     }
