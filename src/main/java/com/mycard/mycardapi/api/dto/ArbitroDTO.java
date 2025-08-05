@@ -17,7 +17,7 @@ public class ArbitroDTO {
     private String nomeArbitro;
     private LocalDate dataNascimento;
     private Long idOrganizacao;
-    private String nomeOrganizacao; // ✅ Adicionado
+    private String nomeOrganizacao; 
 
     public static ArbitroDTO create(Arbitro arbitro) {
         ModelMapper modelMapper = new ModelMapper();
@@ -25,7 +25,7 @@ public class ArbitroDTO {
 
         if (arbitro.getOrganizacao() != null) {
             dto.setIdOrganizacao(arbitro.getOrganizacao().getId());
-            dto.setNomeOrganizacao(arbitro.getOrganizacao().getNomeOrganizacao()); // ✅ Aqui
+            dto.setNomeOrganizacao(arbitro.getOrganizacao().getNomeOrganizacao()); 
         }
 
         return dto;
