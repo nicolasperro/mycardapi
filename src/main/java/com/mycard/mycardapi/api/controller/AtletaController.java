@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class AtletaController {
 
     private final AtletaService service;
-    private final EquipeService equipeService; 
+    private final EquipeService equipeService;
 
     @GetMapping
     public ResponseEntity<List<AtletaDTO>> get() {
@@ -83,7 +83,7 @@ public class AtletaController {
         ModelMapper modelMapper = new ModelMapper();
         Atleta atleta = modelMapper.map(dto, Atleta.class);
 
-        // Lógica para buscar e setar a equipe a partir do ID
+         //Lógica para buscar e setar a equipe a partir do ID
         if (dto.getIdEquipe() != null) {
             Equipe equipe = equipeService.getEquipeById(dto.getIdEquipe())
                     .orElseThrow(() -> new RegraNegocioException("Equipe com id " + dto.getIdEquipe() + " não encontrada."));

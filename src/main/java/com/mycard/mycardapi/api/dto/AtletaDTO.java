@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +19,10 @@ public class AtletaDTO {
     private String apelido;
     private String numeroContato;
     private String emailContato;
+    private String dataNascimento;
+    private String nacionalidade;
+    private String altura;
+    private String pesoCorporal;
 
     private Long idEquipe;
     private String nomeEquipe; // ADICIONADO para exibição

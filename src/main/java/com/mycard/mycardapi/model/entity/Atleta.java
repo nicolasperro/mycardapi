@@ -20,10 +20,10 @@ public class Atleta {
 
     private String nomeCompleto;
     private String genero;
-    private LocalDate dataNascimento;
+    private String dataNascimento;
     private String nacionalidade;
-    private Double altura;
-    private Double pesoCorporal;
+    private String altura;
+    private String pesoCorporal;
     private String apelido;
     private String numeroContato;
     private String emailContato;

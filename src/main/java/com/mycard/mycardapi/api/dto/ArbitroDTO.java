@@ -15,7 +15,7 @@ public class ArbitroDTO {
 
     private Long id;
     private String nomeArbitro;
-    private LocalDate dataNascimento;
+    private String dataNascimento;
     private Long idOrganizacao;
     private String nomeOrganizacao; 
 
