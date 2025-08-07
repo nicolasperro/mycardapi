@@ -20,7 +20,7 @@ public class Evento {
     private Long id;
 
     private String nomeEvento;
-    private LocalDate dataOcorrencia;
+    private String dataOcorrencia;
 
     private String logradouro;
     private String numEndereco;
