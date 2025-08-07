@@ -54,14 +54,20 @@ public class SecurityConfig {
     // Nova forma de configurar o Spring Security
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        HttpSecurity httpSecurity = http
                 .csrf(csrf -> csrf.disable()) // Usa lambda para configurar o CSRF
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(new AntPathRequestMatcher("/api/v1/usuario/**")).hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(new AntPathRequestMatcher("/api/v1/cursos/**")).hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(new AntPathRequestMatcher("/api/v1/disciplinas/**")).hasRole("ADMIN")
-                        .requestMatchers(new AntPathRequestMatcher("/api/v1/professores/**")).hasRole("ADMIN")
-                        .requestMatchers(new AntPathRequestMatcher("/api/v1/turmas/**")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/atletas/**")).hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/lutas/**")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/organizacoesArbitragem/**")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/metodosVitoria/**")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/equipes/**")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/eventos/**")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/funcionarios/**")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/modalidades/**")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/arbitros/**")).hasRole("ADMIN")
+
                         .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/api/v1/usuarios/**")).permitAll()
                         .anyRequest().authenticated()
                 )
