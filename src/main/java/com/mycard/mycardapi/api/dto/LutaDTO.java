@@ -10,30 +10,66 @@ import org.modelmapper.ModelMapper;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LutaDTO {
-
     private Long id;
+
     private Long idEvento;
     private Long idAtleta1;
     private Long idAtleta2;
     private Long idVencedor;
-    private Long idArbitro;      // <-- O controller usa o getter deste campo: getIdArbitro()
-    private Long idModalidade;   // <-- O controller usa o getter deste campo: getIdModalidade()
+    private Long idModalidade;
+    private Long idArbitro;
     private Long idOrganizacao;
+
+    private String evento;
+    private String atleta01;
+    private String atleta02;
+    private String atletaVencedor;
+    private String modalidade;
+
     private String pesoCategoria;
     private Integer rounds;
     private Integer roundEncerramento;
 
     public static LutaDTO create(Luta luta) {
-        ModelMapper modelMapper = new ModelMapper();
-        LutaDTO dto = modelMapper.map(luta, LutaDTO.class);
+        LutaDTO dto = new LutaDTO();
+        dto.setId(luta.getId());
 
-        if (luta.getEvento() != null) dto.setIdEvento(luta.getEvento().getId());
-        if (luta.getAtleta01() != null) dto.setIdAtleta1(luta.getAtleta01().getId());
-        if (luta.getAtleta02() != null) dto.setIdAtleta2(luta.getAtleta02().getId());
-        if (luta.getAtletaVencedor() != null) dto.setIdVencedor(luta.getAtletaVencedor().getId());
-        if (luta.getArbitro() != null) dto.setIdArbitro(luta.getArbitro().getId());
-        if (luta.getModalidade() != null) dto.setIdModalidade(luta.getModalidade().getId());
-        if (luta.getOrganizacaoArbitragem() != null) dto.setIdOrganizacao(luta.getOrganizacaoArbitragem().getId());
+        if (luta.getEvento() != null) {
+            dto.setIdEvento(luta.getEvento().getId());
+            dto.setEvento(luta.getEvento().getNomeEvento());
+        }
+
+        if (luta.getAtleta01() != null) {
+            dto.setIdAtleta1(luta.getAtleta01().getId());
+            dto.setAtleta01(luta.getAtleta01().getNomeCompleto());
+        }
+
+        if (luta.getAtleta02() != null) {
+            dto.setIdAtleta2(luta.getAtleta02().getId());
+            dto.setAtleta02(luta.getAtleta02().getNomeCompleto());
+        }
+
+        if (luta.getAtletaVencedor() != null) {
+            dto.setIdVencedor(luta.getAtletaVencedor().getId());
+            dto.setAtletaVencedor(luta.getAtletaVencedor().getNomeCompleto());
+        }
+
+        if (luta.getArbitro() != null) {
+            dto.setIdArbitro(luta.getArbitro().getId());
+        }
+
+        if (luta.getModalidade() != null) {
+            dto.setIdModalidade(luta.getModalidade().getId());
+            dto.setModalidade(luta.getModalidade().getNomeModalidade());
+        }
+        
+        if (luta.getOrganizacaoArbitragem() != null) {
+            dto.setIdOrganizacao(luta.getOrganizacaoArbitragem().getId());
+        }
+
+        dto.setPesoCategoria(luta.getPesoCategoria());
+        dto.setRounds(luta.getRounds());
+        dto.setRoundEncerramento(luta.getRoundEncerramento());
 
         return dto;
     }

@@ -18,7 +18,7 @@ public class Arbitro {
     private Long id;
 
     private String nomeArbitro;
-    private LocalDate dataNascimento;
+    private String dataNascimento;
 
     @ManyToOne
     @JoinColumn(name = "organizacao_id")
