@@ -20,7 +20,7 @@ public class Equipe {
     private Long id;
 
     private String nomeEquipe;
-    private LocalDate dataCriacao;
+    private String dataCriacao;
 
     private String logradouro;
     private String numEndereco;
