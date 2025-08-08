@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventoDTO {
-
     private Long id;
     private String nomeEvento;
     private LocalDate dataOcorrencia;

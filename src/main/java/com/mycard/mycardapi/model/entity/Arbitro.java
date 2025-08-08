@@ -1,10 +1,9 @@
 package com.mycard.mycardapi.model.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "arbitro")

@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
-import java.time.LocalDate;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +13,7 @@ public class EquipeDTO {
 
     private Long id;
     private String nomeEquipe;
-    private LocalDate dataCriacao;
+    private String dataCriacao;
     private String logradouro;
     private String numEndereco;
     private String cep;

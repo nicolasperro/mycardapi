@@ -24,6 +24,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
                 .select()
+                // Garanta que este é o pacote correto dos seus controllers
                 .apis(RequestHandlerSelectors
                         .basePackage("com.mycard.mycardapi.api.controller"))
                 .paths(PathSelectors.any())
@@ -38,12 +39,15 @@ public class SwaggerConfig {
                 .title("MyCard API")
                 .description("API do MyCard")
                 .version("1.0")
-                .contact(contact()) // O erro está aqui, vamos corrigir
+                .contact(contact())
                 .build();
     }
 
+    // Sinta-se à vontade para preencher com seus dados
     private Contact contact() {
-        return new Contact("Nome do Desenvolvedor", "URL do Desenvolvedor", "email@exemplo.com");
+        return new Contact("Seu Nome",
+                "http://github.com/seu-usuario",
+                "seu-email@exemplo.com");
     }
 
     public ApiKey apiKey() {
@@ -67,5 +71,4 @@ public class SwaggerConfig {
         auths.add(reference);
         return auths;
     }
-
 }

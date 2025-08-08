@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
-import java.time.LocalDate;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,7 +23,7 @@ public class AtletaDTO {
     private String pesoCorporal;
 
     private Long idEquipe;
-    private String nomeEquipe; // ADICIONADO para exibição
+    private String nomeEquipe;
 
     public static AtletaDTO create(Atleta atleta) {
         ModelMapper modelMapper = new ModelMapper();
@@ -33,7 +31,7 @@ public class AtletaDTO {
 
         if (atleta.getEquipe() != null) {
             dto.setIdEquipe(atleta.getEquipe().getId());
-            dto.setNomeEquipe(atleta.getEquipe().getNomeEquipe()); // <-- Nome exibido na listagem
+            dto.setNomeEquipe(atleta.getEquipe().getNomeEquipe());
         }
 
         return dto;

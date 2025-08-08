@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import jakarta.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -20,7 +19,7 @@ public class Evento {
     private Long id;
 
     private String nomeEvento;
-    private LocalDate dataOcorrencia;
+    private String dataOcorrencia;
 
     private String logradouro;
     private String numEndereco;
