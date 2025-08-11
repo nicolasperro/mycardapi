@@ -11,7 +11,7 @@
 	<groupId>com.mycard</groupId>
 	<artifactId>mycardapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>blzapi</name>
+	<name>mycardapi</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
