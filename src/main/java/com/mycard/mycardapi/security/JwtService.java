@@ -4,13 +4,15 @@ import com.mycard.mycardapi.model.entity.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm; // Import para o algoritmo
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
+
 
 @Service
 public class JwtService {
@@ -26,16 +28,26 @@ public class JwtService {
         LocalDateTime dataHoraExpiracao = LocalDateTime.now().plusMinutes(expString);
         Date data = Date.from(dataHoraExpiracao.atZone(ZoneId.systemDefault()).toInstant());
 
+        // ADICIONANDO AS PERMISSÕES (ROLES) COMO UMA CLAIM NO TOKEN
+        HashMap<String, Object> claims = new HashMap<>();
+        if (usuario.isAdmin()) {
+            claims.put("roles", new String[]{"ROLE_ADMIN", "ROLE_USER"});
+        } else {
+            claims.put("roles", new String[]{"ROLE_USER"});
+        }
+
+
         return Jwts.builder()
                 .setSubject(usuario.getLogin())
                 .setExpiration(data)
-                // Sintaxe antiga do signWith
+                .addClaims(claims) // Adiciona as permissões ao corpo do token
                 .signWith(SignatureAlgorithm.HS512, chaveAssinatura)
                 .compact();
     }
 
+    // O resto da sua classe JwtService continua igual...
+
     private Claims obterClaims(String token) throws ExpiredJwtException {
-        // Sintaxe antiga do parser
         return Jwts.parser()
                 .setSigningKey(chaveAssinatura)
                 .parseClaimsJws(token)

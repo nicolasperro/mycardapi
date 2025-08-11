@@ -13,14 +13,13 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter { // MUDANÇA PRINCIPAL
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UsuarioService usuarioService;
@@ -28,38 +27,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // MUDANÇA P
     @Autowired
     private JwtService jwtService;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    // 1. INJEÇÃO DO PASSWORD ENCODER
+    // Injeta o bean PasswordEncoder que já existe no contexto da aplicação.
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Bean
     public OncePerRequestFilter jwtFilter() {
         return new JwtAuthFilter(jwtService, usuarioService);
     }
 
+    // Completa a configuração do gerenciador de autenticação.
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(usuarioService)
-                .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder);
     }
 
+    // Configura as regras de autorização para os endpoints HTTP
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/usuario/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/v1/usuario/**").permitAll()
                 .antMatchers("/api/v1/atletas/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/api/v1/lutas/**").hasRole("ADMIN")
-                .antMatchers("/api/v1/organizacoesArbitragem/**").hasRole("ADMIN")
-                .antMatchers("/api/v1/metodosVitoria/**").hasRole("ADMIN")
-                .antMatchers("/api/v1/equipes/**").hasRole("ADMIN")
-                .antMatchers("/api/v1/eventos/**").hasRole("ADMIN")
-                .antMatchers("/api/v1/funcionarios/**").hasRole("ADMIN")
-                .antMatchers("/api/v1/modalidades/**").hasRole("ADMIN")
-                .antMatchers("/api/v1/arbitros/**").hasRole("ADMIN")
+                .antMatchers("/api/v1/organizacoesArbitragem/**").permitAll()
+                .antMatchers("/api/v1/metodosVitoria/**").hasRole("admin")
+                .antMatchers("/api/v1/equipes/**").permitAll()
+                .antMatchers("/api/v1/eventos/**").permitAll()
+                .antMatchers("/api/v1/funcionarios/**").permitAll()
+                .antMatchers("/api/v1/modalidades/**").permitAll()
+                .antMatchers("/api/v1/arbitros/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/usuarios/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -69,6 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // MUDANÇA P
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
+    // Configura recursos que devem ser ignorados pela segurança (ex: Swagger UI)
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
